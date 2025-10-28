@@ -60,7 +60,8 @@ y_axis = ["Calculated Parameters (Energy)", "Heat Of Combustion"]
 # Extras
 extra_1 = ("DPT1 Engine Air & Exhaust", "Exhaust Gas Temperature")
 extra_2 = ("Calculated Parameters (Energy)", "Inlet Air Enthalpy")
+extra_3 = ("DPT1 Engine Air & Exhaust", "Air Mass Flow Rate")
 
 # Example 2: different primary Y, tighter threshold for secondary axis
-p1 = Plotter(x_axis, y_axis, extra_1, extra_2, secondary_threshold=5.0, two_sided_threshold=True)
+p1 = Plotter(x_axis, y_axis, extra_3, secondary_threshold=5.0, two_sided_threshold=True)
 p1.plot_data()
