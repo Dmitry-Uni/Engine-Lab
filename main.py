@@ -53,12 +53,14 @@ from plotting import Plotter
     # inlet_enthalpy_over_time = Plotter(x_axis, y_axis)
     #inlet_enthalpy_over_time.plot_data()
 
+# Core X/Y
 x_axis = ["Time", "Time"]
 y_axis = ["Calculated Parameters (Energy)", "Heat Of Combustion"]
-inlet_enthalpy_over_time = Plotter(x_axis, y_axis)
-inlet_enthalpy_over_time.plot_data()
 
-x_axis = ["Time", "Time"]
-y_axis = ["Calculated Parameters (Energy)", "Inlet Air Enthalpy"]
-inlet_enthalpy_over_time = Plotter(x_axis, y_axis)
-inlet_enthalpy_over_time.plot_data()
+# Extras
+extra_1 = ("DPT1 Engine Air & Exhaust", "Exhaust Gas Temperature")
+extra_2 = ("Calculated Parameters (Energy)", "Inlet Air Enthalpy")
+
+# Example 2: different primary Y, tighter threshold for secondary axis
+p1 = Plotter(x_axis, y_axis, extra_1, extra_2, secondary_threshold=5.0, two_sided_threshold=True)
+p1.plot_data()
