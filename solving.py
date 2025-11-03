@@ -5,7 +5,8 @@ from preprocessing import get_data
 import pandas as pd
 
 def write(*args):
-
+    
+    # Empty case writes all means
     if args == ():
 
         df = pd.read_excel("Data/AAAAAA.xlsx", header=[0, 1])
@@ -23,6 +24,7 @@ def write(*args):
 
         return
     
+    # Selected columns case, takes in args
     else: 
         file_name = "Means_Selected.txt"
         with open(file_name, 'w') as file:

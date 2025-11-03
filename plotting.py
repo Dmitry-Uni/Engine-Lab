@@ -5,7 +5,8 @@ from itertools import cycle
 from preprocessing import get_data
 
 class Plotter:
-    def __init__(self, x_axis, y_axis, *additional_y_axes, secondary_threshold=5.0, two_sided_threshold=False):
+    def __init__(self, x_axis, y_axis, *additional_y_axes, 
+                 secondary_threshold=5.0, two_sided_threshold=False):
         self.x_axis = x_axis
         self.y_axis = y_axis
         self.additional_y_axes = additional_y_axes
@@ -47,7 +48,6 @@ class Plotter:
             n = min(len(x), len(s_clean))
             extras.append({"name": name, "unit": unit, "data": s_clean.iloc[:n]})
 
-        # Classify ALL extras with the same rule
         primary_max = np.nanmax(y.values) if len(y) else np.nan
         primary_axis_extras = []
         secondary_axis_extras = []
@@ -56,7 +56,6 @@ class Plotter:
             d = e["data"].values
             emax = np.nanmax(d) if d.size else np.nan
 
-            # Default to primary if missing/invalid
             if np.isnan(primary_max) or np.isnan(emax) or primary_max == 0:
                 primary_axis_extras.append(e)
                 continue
