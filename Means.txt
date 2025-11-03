@@ -1,0 +1,31 @@
+Mean (Whole Dataset)
+Time Mean: 201.0 
+Fuel Consumption Mean: 13.866842105263157 
+Fuel Consumption.1 Mean: 0.0001723684210526316 
+Fuel Density Mean: 740.0 
+Fuel Calorific Value Mean: 43.8 
+Heat Of Combustion Mean: 7499.021052631579 
+Exhaust Gas Enthalpy Mean: No non-zero data available
+Inlet Air Enthalpy Mean: 804.0 
+Heat Loss To Exhaust Mean: No non-zero data available
+Ambient Air Temperature Mean: 24.371641791044777 
+Exhaust Gas Temperature Mean: 279.46268656716416 
+Airbox Differential Pressure Mean: -119.52 
+Ambient Air Pressure Mean: 1009.0248756218906 
+Orifice Diameter Mean: 18.5 
+Air Mass Flow Rate Mean: 2.70365 
+Torque Mean: 11.97910447761194 
+Speed Mean: 1399.39 
+Power Mean: 1766.19 
+Water Inlet Temperature T1 Mean: No non-zero data available
+Water Outlet Temperature T2 Mean: No non-zero data available
+Exhaust Inlet Temperature T3 Mean: No non-zero data available
+Exhaust Outlet Temperature T4 Mean: No non-zero data available
+Cooling Water Flow Rate Mean: No non-zero data available
+Air Fuel Ratio Mean: 15.722857142857142 
+Specific Consumption Mean: 0.3588359788359788 
+Thermal Efficiency Mean: 23.445238095238093 
+Volumetric Efficiency Mean: 98.35597989949748 
+Engine Capacity Mean: 200.0 
+Number Of Cycles [2 or 4] Mean: 4.0 
+BMEP Mean: 7.56325 

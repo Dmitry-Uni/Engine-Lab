@@ -1,0 +1,2 @@
+Mean (Selected Columns)
+Heat Of Combustion Mean: 7499.021052631579 

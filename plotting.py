@@ -35,12 +35,10 @@ class Plotter:
         x = self._to_numeric(x_data).reset_index(drop=True)
         y = self._to_numeric(y_data).reset_index(drop=True)
 
-        # Align primary
         n_main = min(len(x), len(y))
         x = x.iloc[:n_main]
         y = y.iloc[:n_main]
 
-        # Prepare extras
         extras = []
         for i, s in enumerate(add_data):
             name = self.additional_y_axes[i][1] if i < len(self.additional_y_axes) else f"Y{i+2}"
@@ -65,7 +63,6 @@ class Plotter:
 
             ratio = emax / primary_max
 
-            # Secondary if "much larger" (always) or "much smaller" (optional)
             if ratio >= self.secondary_threshold:
                 secondary_axis_extras.append(e)
             elif self.two_sided_threshold and ratio <= (1.0 / self.secondary_threshold):
