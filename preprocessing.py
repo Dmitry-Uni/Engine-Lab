@@ -25,6 +25,6 @@ def get_data(x_axis, y_axis, *args):
     print("Data prepared.")
 
     if args:
-        return [x_units, y_units], [x_data.iloc[2:], y_data.iloc[2:]], add_y_units, add_y_data
+        return [x_units, y_units], [x_data.iloc[2:-3], y_data.iloc[2:-3]], add_y_units, add_y_data
     else:
-        return [x_units, y_units], [x_data.iloc[2:], y_data.iloc[2:]]
+        return [x_units, y_units], [x_data.iloc[2:-3], y_data.iloc[2:-3]]
