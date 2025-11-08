@@ -1,5 +1,9 @@
 import pandas as pd
 
+# =============================================================================
+    #Engine Params
+# =============================================================================
+
 df = pd.read_excel("Data/AAAAAA.xlsx", header=[0, 1])
 
 def get_data(x_axis, y_axis, *args):
@@ -28,3 +32,14 @@ def get_data(x_axis, y_axis, *args):
         return [x_units, y_units], [x_data.iloc[2:-3], y_data.iloc[2:-3]], add_y_units, add_y_data
     else:
         return [x_units, y_units], [x_data.iloc[2:-3], y_data.iloc[2:-3]]
+    
+# =============================================================================
+    #Engine Pressure
+# =============================================================================
+
+def get_pressure(RPM, *args):
+
+    dfp = pd.read_excel(f"Data/{RPM} - Pressure Data.xlsx", header=[0, 1])
+    return dfp[args[0]]
+
+print(get_pressure(1500, "Pressure"))
