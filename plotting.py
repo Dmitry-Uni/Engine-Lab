@@ -5,7 +5,8 @@ from itertools import cycle
 from preprocessing import get_data
 
 class Plotter:
-    def __init__(self, x_axis, y_axis, *additional_y_axes, secondary_threshold=5.0, two_sided_threshold=False):
+    def __init__(self, x_axis, y_axis, *additional_y_axes, 
+                 secondary_threshold=5.0, two_sided_threshold=False):
         self.x_axis = x_axis
         self.y_axis = y_axis
         self.additional_y_axes = additional_y_axes
@@ -35,12 +36,10 @@ class Plotter:
         x = self._to_numeric(x_data).reset_index(drop=True)
         y = self._to_numeric(y_data).reset_index(drop=True)
 
-        # Align primary
         n_main = min(len(x), len(y))
         x = x.iloc[:n_main]
         y = y.iloc[:n_main]
 
-        # Prepare extras
         extras = []
         for i, s in enumerate(add_data):
             name = self.additional_y_axes[i][1] if i < len(self.additional_y_axes) else f"Y{i+2}"
@@ -49,7 +48,6 @@ class Plotter:
             n = min(len(x), len(s_clean))
             extras.append({"name": name, "unit": unit, "data": s_clean.iloc[:n]})
 
-        # Classify ALL extras with the same rule
         primary_max = np.nanmax(y.values) if len(y) else np.nan
         primary_axis_extras = []
         secondary_axis_extras = []
@@ -58,14 +56,12 @@ class Plotter:
             d = e["data"].values
             emax = np.nanmax(d) if d.size else np.nan
 
-            # Default to primary if missing/invalid
             if np.isnan(primary_max) or np.isnan(emax) or primary_max == 0:
                 primary_axis_extras.append(e)
                 continue
 
             ratio = emax / primary_max
 
-            # Secondary if "much larger" (always) or "much smaller" (optional)
             if ratio >= self.secondary_threshold:
                 secondary_axis_extras.append(e)
             elif self.two_sided_threshold and ratio <= (1.0 / self.secondary_threshold):
