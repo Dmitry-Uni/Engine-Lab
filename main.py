@@ -71,5 +71,4 @@ extra_9 = ("Calculated Parameters (Engine)", "BMEP")
 # Example 2: different primary Y, tighter threshold for secondary axis
 p1 = Plotter(x_axis, extra_7, extra_8, secondary_threshold=2.0, two_sided_threshold=True)
 # Plotter instances
-p2 = Plotter(x_axis, y_axis, extra_3, secondary_threshold=5.0, two_sided_threshold=True)
-p2.plot_data()
+p1.plot_data()

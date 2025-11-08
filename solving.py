@@ -4,12 +4,12 @@
 from preprocessing import get_data
 import pandas as pd
 
+df = pd.read_excel("Data/AAAAAA.xlsx", header=[0, 1])
+
 def write(*args):
     
     # Empty case writes all means
     if args == ():
-
-        df = pd.read_excel("Data/AAAAAA.xlsx", header=[0, 1])
 
         file_name = "Means.txt"
         with open(file_name, 'w') as file:
@@ -41,7 +41,7 @@ def write(*args):
         return
     
 # =============================================================================
-    #Stroke plots
+    # More Plots
 # =============================================================================
 import matplotlib.pyplot as plt
 import numpy as np
@@ -50,7 +50,47 @@ from preprocessing import get_pressure
 def stroke_plots():
 
     RPMs = [1500, 2000, 2500]
+    RPM = df["DTS2 Engine Torque & Speed"]["Speed"][2:-2]
+    revavg = sum(RPM) / len(RPM)
 
-stroke_plots()
 
-# =============================================================================
+    # Set x axis
+    d_lim = 360  # Limit data to first 360 degrees
+    angle = get_pressure(RPMs[0], "Angle")[:d_lim]
+    volume = get_pressure(RPMs[0], "Volume")[:d_lim]
+    time = np.linspace(0, 1/revavg, d_lim)  # Time for one stroke
+
+
+    # Set y axis
+    pressure = 4*get_pressure(RPMs[0], "Pressure")[:d_lim]
+    
+
+    # Plotting Pressure vs Crank Angle
+    plt.figure(figsize=(10, 6))
+    plt.scatter(angle, pressure, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.xlabel('Crank Angle (degrees)')
+    plt.ylabel('Pressure (bar)')
+    plt.title('Pressure vs Crank Angle at Average RPM') 
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+    # Plotting Pressure vs Volume
+    plt.figure(figsize=(10, 6))
+    plt.scatter(volume[:180], pressure[:180], label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.xlabel('Volume (cc)')
+    plt.ylabel('Pressure (bar)')
+    plt.title('Pressure vs Volume at Average RPM') 
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+    # Plotting Pressure vs Time
+    plt.figure(figsize=(10, 6))
+    plt.scatter(time, pressure, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.xlabel('Time (s)')
+    plt.ylabel('Pressure (bar)')
+    plt.title('Pressure vs Time at Average RPM') 
+    plt.legend()
+    plt.grid()
+    plt.show()
