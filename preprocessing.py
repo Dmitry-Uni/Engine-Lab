@@ -42,4 +42,3 @@ def get_pressure(RPM, *args):
     dfp = pd.read_excel(f"Data/{RPM} - Pressure Data.xlsx", header=[0, 1])
     return dfp[args[0]]
 
-print(get_pressure(1500, "Pressure"))

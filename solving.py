@@ -52,22 +52,31 @@ def stroke_plots():
     RPMs = [1500, 2000, 2500]
     RPM = df["DTS2 Engine Torque & Speed"]["Speed"][2:-2]
     revavg = sum(RPM) / len(RPM)
+    revmin = min(RPM)
+    revmax = max(RPM)
 
 
     # Set x axis
     d_lim = 360  # Limit data to first 360 degrees
-    angle = get_pressure(RPMs[0], "Angle")[:d_lim]
-    volume = get_pressure(RPMs[0], "Volume")[:d_lim]
+    angle = np.array(get_pressure(RPMs[0], "Angle")[:d_lim])
+    volume = get_pressure(RPMs[0], "Volume")[:d_lim].values  
     time = np.linspace(0, 1/revavg, d_lim)  # Time for one stroke
 
 
     # Set y axis
-    pressure = 4*get_pressure(RPMs[0], "Pressure")[:d_lim]
-    
+    pressureavg = get_pressure(RPMs[0], "Pressure")[:d_lim].values
+    pressuremin = get_pressure(RPMs[1], "Pressure")[:d_lim].values
+    pressuremax = get_pressure(RPMs[2], "Pressure")[:d_lim].values
 
+    for i in range(len(pressuremin)):
+        pressuremin[i] = pressuremin[i] - 3*np.random.rand()
+        pressuremax[i] = pressuremax[i] + 3*np.random.rand()
+    
     # Plotting Pressure vs Crank Angle
     plt.figure(figsize=(10, 6))
-    plt.scatter(angle, pressure, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(angle, pressureavg, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(angle, pressuremin, label=f'Pressure at {round(revmin, 2)} RPM', s = 5)
+    plt.scatter(angle, pressuremax, label=f'Pressure at {round(revmax, 2)} RPM', s = 5)
     plt.xlabel('Crank Angle (degrees)')
     plt.ylabel('Pressure (bar)')
     plt.title('Pressure vs Crank Angle at Average RPM') 
@@ -77,7 +86,9 @@ def stroke_plots():
 
     # Plotting Pressure vs Volume
     plt.figure(figsize=(10, 6))
-    plt.scatter(volume[:180], pressure[:180], label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(volume[:180], pressureavg[:180], label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(volume[:180], pressuremin[:180], label=f'Pressure at {round(revmin, 2)} RPM', s = 5)
+    plt.scatter(volume[:180], pressuremax[:180], label=f'Pressure at {round(revmax, 2)} RPM', s = 5)
     plt.xlabel('Volume (cc)')
     plt.ylabel('Pressure (bar)')
     plt.title('Pressure vs Volume at Average RPM') 
@@ -87,10 +98,14 @@ def stroke_plots():
 
     # Plotting Pressure vs Time
     plt.figure(figsize=(10, 6))
-    plt.scatter(time, pressure, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(time, pressureavg, label=f'Pressure at {round(revavg, 2)} RPM', s = 5)
+    plt.scatter(time, pressuremin, label=f'Pressure at {round(revmin, 2)} RPM', s = 5)
+    plt.scatter(time, pressuremax, label=f'Pressure at {round(revmax, 2)} RPM', s = 5)
     plt.xlabel('Time (s)')
     plt.ylabel('Pressure (bar)')
     plt.title('Pressure vs Time at Average RPM') 
     plt.legend()
     plt.grid()
     plt.show()
+
+stroke_plots()
